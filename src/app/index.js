@@ -1,5 +1,6 @@
 import React from "react"
-import Ground from './app/components/ground.js'
+import Ground from './components/ground'
+
 const App = () => {
   return (
     <div>
