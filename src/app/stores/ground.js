@@ -8,7 +8,7 @@ export default class Ground {
   @observable snake = {}
   @observable eggIndex = 876
   
-  constructor(rowNum){
+  constructor(rowNum = 20){
     let colNum = 1.2 * rowNum
     let index = 0
     for (let i = 0; i < rowNum * 1.2 ; i++) {
