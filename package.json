@@ -62,7 +62,9 @@
     "lodash-decorators": "^6.0.0",
     "mini-css-extract-plugin": "0.4.3",
     "mobx": "^5.7.0",
+    "mobx-react": "^5.4.2",
     "moment": "^2.22.2",
+    "node-sass": "^4.10.0",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "pnp-webpack-plugin": "1.1.0",
     "postcss-flexbugs-fixes": "4.1.0",
@@ -165,10 +167,12 @@
       [
         "@babel/plugin-proposal-decorators",
         {
-          "decoratorsBeforeExport": true
+          "legacy": true
         }
       ],
-      "@babel/plugin-proposal-class-properties",
+      [ "@babel/plugin-proposal-class-properties", {
+        "loose": true
+      }],
       [
         "import",
         {
