@@ -1,4 +1,3 @@
 {
   "flow.pathToFlow": "${workspaceRoot}/node_modules/.bin/flow",
-  "workbench.colorTheme": "Slack Theme Tritanopia",
 }
