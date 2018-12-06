@@ -4,8 +4,9 @@ import Pixel from './pixel.js'
 import Egg from './egg.js'
 import './ground.scss'
 import { observer } from 'mobx-react'
+import styled from 'styled-components'
 
-const ground = GroundStore.fromJS()
+const ground = GroundStore.fromJS(20, 20)
 
 window.document.onkeydown = function (e) {
   let directionKeyCode = [37, 38, 39 ,40]
@@ -23,6 +24,43 @@ window.document.onkeydown = function (e) {
 
   }
 }
+
+const GroundStyled = styled.div`
+  width: ${props => (props.width + 'px') || '400px'};
+  height: ${props => (props.height + 'px') || '400px'};
+  background: ${props => props.theme.white};
+  box-shadow: 0 0 2px ${props => props.theme.purpleLine};
+  display: flex;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  box-sizing: content-box;
+  margin-top: 100px;
+
+  .pixel {
+    width: ${props => ( ( (props.width || 400) - 1 ) / (props.rowNum) )}px;
+    height: ${props => ( ( (props.height || 400) - 1 ) / (props.colNum) )}px;
+    box-shadow: 0px 0px 1px ${props => props.theme.grayLine};
+  }
+
+  .egg {
+    width: ${props => ( ( (props.width || 400) - 1 ) / (props.rowNum) )}px;
+    height: ${props => ( ( (props.height || 400) - 1 ) / (props.colNum) )}px;
+    box-shadow: 0px 0px 1px ${props => props.theme.grayLine};
+    border-radius: 50%;
+    background: black;
+  }
+
+  .pixel.snake {
+    width: 20px;
+    height: 20px;
+    /* width: ${props => ( ( (props.width || 400) - 1 ) / (props.rowNum) )}px;
+    height: ${props => ( ( (props.height || 400) - 1 ) / (props.colNum) )}px; */
+    box-shadow: 0px 0px 1px ${props => props.theme.grayLine};
+    background: black;
+  }
+`
 
 @observer
 class Ground extends React.Component {
@@ -42,13 +80,20 @@ class Ground extends React.Component {
   }
 
   render() {
+    const { rowNum, colNum, width, height } = ground
     return (
-      <div>
-        <div className="ground" onKeyDown={this.x}>
+      <React.Fragment>
+        <GroundStyled
+          rowNum={rowNum}
+          colNum={colNum}
+          width={width}
+          height={height}
+          className="ground"
+        >
           {this.renderPixel()}
-        </div>
+        </GroundStyled>
         <div className="score">{ground.score}</div>
-      </div>
+      </React.Fragment>
     )
   }
 }

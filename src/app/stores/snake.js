@@ -12,12 +12,12 @@ export default class Snake {
   @observable steps = []
   @observable initSpeed
 
-  constructor(store, rowNum, initSpeed = 5){
+  constructor(store, rowNum, colNum, initSpeed = 5){
     this.store = store
     this.initSpeed = initSpeed
     this.rowNum = rowNum
     this.colNum = rowNum * 1.2
-    let snakeStartIndex = (rowNum / 2 - 1 ) * (rowNum * 1.2)
+    let snakeStartIndex = (rowNum / 2 - 1 ) * colNum
     for (let i = 0; i < 4; i++) {
       this.body.push(3 + snakeStartIndex + i)
     }
@@ -172,7 +172,7 @@ export default class Snake {
     }
   }
 
-  static fromJS(store, rowNum) {
-    return new Snake(store, rowNum)
+  static fromJS(store, rowNum, colNum) {
+    return new Snake(store, rowNum, colNum)
   }
 }

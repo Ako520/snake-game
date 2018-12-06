@@ -5,13 +5,13 @@ import cx from 'classnames'
 @observer
 class Pixel extends React.Component {
   render() {
-    const { isSnake } = this.props
+    const { isSnake, index } = this.props
     let pixelClass = cx({
       "pixel": true,
       "snake": isSnake
     })
     return (
-      <div className={pixelClass} onClick={() => {console.log(this.props.index)}}></div>
+      <div num={index + 1} className={pixelClass} onClick={() => {console.log(this.props.index)}}></div>
     )
   }
 }
