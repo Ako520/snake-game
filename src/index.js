@@ -1,18 +1,17 @@
 import "./app/styles/index.scss"
-
 import React from "react"
 import ReactDOM from "react-dom"
-import App from './App.js'
-import { Provider } from 'mobx-react'
-import stores from './app/stores/index'
+import App from './app/index.js'
 import { ThemeProvider } from 'styled-components'
 import mainTheme from './app/styles/theme/mainTheme'
+import control from './app/stores/control'
+import ground from './app/stores/ground'
+
+control.ground = ground
 
 ReactDOM.render(
   <ThemeProvider theme={mainTheme}>
-    <Provider {...stores}>
-      <App />
-    </Provider>
+    <App />
   </ThemeProvider>,
   document.getElementById("root")
 )

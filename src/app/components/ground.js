@@ -1,29 +1,10 @@
 import React from 'react';
-import GroundStore from '../stores/ground.js'
 import Pixel from './pixel.js'
 import Egg from './egg.js'
 import './ground.scss'
 import { observer } from 'mobx-react'
 import styled from 'styled-components'
-
-const ground = GroundStore.fromJS(20, 20)
-
-window.document.onkeydown = function (e) {
-  let directionKeyCode = [37, 38, 39 ,40]
-  if (directionKeyCode.indexOf(e.keyCode) !== -1) {
-    ground.snake.turnDirection(e.keyCode)
-  }
-  switch (e.keyCode) {
-    case 37 || 38 || 39 || 40:
-      ground.snake.turnDirection(e.keyCode)
-      break;
-    case 32:
-      ground.start()
-      break;
-    default:
-
-  }
-}
+import ground from '../stores/ground'
 
 const GroundStyled = styled.div`
   width: ${props => (props.width + 'px') || '400px'};
