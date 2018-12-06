@@ -1,0 +1,15 @@
+@import './_variables.scss';
+
+$groundHeight: 800px;
+$groundWidth: $groundHeight * 1.2;
+
+@mixin ground ($width : $groundWidth, $height : $groundHeight){
+  width: $width;
+  height: $height;
+  background:$white;
+}
+
+@mixin pixel () {
+  width: ($groundHeight - 1) / 40 ;
+  height: ($groundHeight - 1) / 40 ;
+}

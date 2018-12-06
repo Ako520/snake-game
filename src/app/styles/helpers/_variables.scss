@@ -1,0 +1,94 @@
+$red    : #f00;
+$blue   : #00f;
+$white  : #fff;
+$gray   : #999;
+$black  : #000;
+//****************************宽度*************************
+//****************************高度*************************
+//****************************字体颜色*************************
+//注册字体颜色
+//rgb 153 153 153
+$lightText: #999999; //产品列表 title颜色
+//rgb 51 51 51
+$darkText: #666666; //产品列表 content颜色
+//rgb 102 102 102
+$text: #333333; //Form placeholder颜色
+//rgb 187 187 187
+$placrholderText: #bbbbbb; //Button 紫色的Text
+//rgb 125 90 231
+$purpleBText: #7d5ae7; //Button【使用优惠码】 紫色的Text
+//rgb 40 108 172
+$blueText: rgb(40,108,172); //单选 未选中 text颜色
+//rgb 74 74 74
+$cknoSelect: #8d79f5; //单选 已选中 text颜色
+//rgb 74 74 74
+$ckSelect: #8d79f5; //我的 红色1份
+//rgb 255 99 99
+$redText: #ff6363;
+//rgb 204 204 204
+$grayText: rgb(204, 204, 204);
+//rgb 187 187 187
+$disabledButton: #bbbbbb; //Button 紫色的Text
+//rgb 136 136 136
+$tableHead: rgb(136, 136, 136); //table-head的text颜色
+//rgb 250 91 69
+$warning: rgb(250, 91, 69); //end-time
+//****************************线颜色**************************
+//进度的线
+//rgb 187 187 187
+$loginInputLine: rgb(187,187,187); //login input bottom线
+
+$darkLine: rgb(234,234,234); //注册的线
+
+$line: rgb(238,238,238); //header线
+//rgb 221 221 221
+$inputline: #dddddd;
+//rgb 228 228 228
+$textareaLine: #e4e4e4;
+
+$purpleLine: rgb(141,121,245);
+//rgb 40 108 172
+$blueLine: rgb(40, 108, 172); //upload-out dragger
+//rgb 237 237 237
+$grayLine: rgb(237, 237, 237); //modal-table
+//rgb 73 169 238
+$blueSelectLine: rgb(73,169,238);
+
+//****************************渐变颜色***********************
+//渐变从左到右 第一个颜色
+//rgb 255 110 172
+$gradientOne: #ff6eac; //渐变从左到右 最后一个颜色
+//rgb 162 105 240
+$gradient: #a269f0;
+
+//***************************背景色***********************
+//rgb 249 249 249
+$bgLightGary: #f9f9f9; //背景色 灰色
+//rgb 251 249 255
+$bgpaleLavender: rgb(251, 249, 255);
+//rgb 247 247 247
+$bgGray: rgb(247, 247, 247); //报告form表单背景 upload-out table-head背景
+//rgb 246 244 255
+$bgUploadAbleOut: rgb(246, 246, 255); //报告form表单背景 upload-out-able
+//rgb 250 249 255
+$bgUploadAbleIn: rgb(250, 249, 255); //报告form表单背景 upload-in-able
+//rgb 125 102 143
+$bgBlueHover: rgb(24, 99, 170);
+//rgb 254 227 224
+$bgWarningTipBorder: rgb(254, 227, 224); // warning-tip
+//rgb 255 243 242
+$bgWaringTip: rgb(255, 243, 242);
+//rgb 40 108 172
+$bgBlue: rgb(40,108,172);  // 深蓝色button
+//rgba 125 90 230, 0.40
+$bgPurpleOpacity:rgba(125, 90, 230, 0.40);
+//rgb 250 249 255
+$bgBlueLightHover:rgb(120,188,252); // input 下拉菜单
+//rgb 73 169 238
+$bgBlueSelect:rgb(73,169,238);
+//rgb 234 234 234
+// $bgGrayL:rgb(234, 234, 234)
+
+//***************************阴影***********************
+// 0 0 0 2px rgba(141, 121, 245, 0.2)
+$boxShadowInput:0 0 0 2px rgba(40,108,172, 0.2);
