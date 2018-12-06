@@ -2,7 +2,7 @@ import { observable, action , computed} from 'mobx'
 import Pixel from './pixel'
 import Snake from './snake'
 
-export default class Ground {
+class Ground {
   @observable pixels = []
   @observable score = 0
   @observable snake = {}
@@ -60,3 +60,5 @@ export default class Ground {
     return store
   }
 }
+
+export default Ground.fromJS()
