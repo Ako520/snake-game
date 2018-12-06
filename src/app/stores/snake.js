@@ -12,7 +12,7 @@ export default class Snake {
   @observable steps = []
   @observable initSpeed
 
-  constructor(store, rowNum, initSpeed = 5){
+  constructor(store, rowNum = 20, initSpeed = 5){
     this.store = store
     this.initSpeed = initSpeed
     this.rowNum = rowNum

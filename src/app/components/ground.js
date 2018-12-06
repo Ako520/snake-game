@@ -5,8 +5,7 @@ import Egg from './egg.js'
 import './ground.scss'
 import { observer } from 'mobx-react'
 
-let row = 40
-const ground = GroundStore.fromJS(row)
+const ground = GroundStore.fromJS()
 
 window.document.onkeydown = function (e) {
   let directionKeyCode = [37, 38, 39 ,40]
