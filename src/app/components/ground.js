@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import Pixel from './pixel.js'
 import Egg from './egg.js'
@@ -36,17 +37,15 @@ const GroundStyled = styled.div`
   .pixel.snake {
     width: 20px;
     height: 20px;
-    /* width: ${props => ( ( (props.width || 400) - 1 ) / (props.rowNum) )}px;
-    height: ${props => ( ( (props.height || 400) - 1 ) / (props.colNum) )}px; */
     box-shadow: 0px 0px 1px ${props => props.theme.grayLine};
     background: black;
   }
 `
 
 @observer
-class Ground extends React.Component {
-  renderPixel = () => {
-    return  ground.pixels.map(pixel => {
+class Ground extends React.Component<{}> {
+  renderPixel = (): (any)[] => {
+    return ground.pixels.map(pixel => {
         if (ground.eggIndex !== pixel.index) {
           if (ground.snake.body.indexOf(pixel.index) !== -1) { //如果是蛇的身体就渲染蛇
             return (<Pixel index={pixel.index} key={pixel.index} isSnake={true} />)

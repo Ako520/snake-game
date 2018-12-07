@@ -1,7 +1,7 @@
 // @flow
 import { observable, computed, action } from 'mobx'
-import typeof Ground from '../components/ground'
 import {DIRECTION} from '../utils/const'
+import typeof Ground from './ground'
 
 export default class Snake {
   @observable body = []
@@ -9,8 +9,6 @@ export default class Snake {
   @observable steps = []
   @observable initSpeed:number
   ground: Ground
-  rowNum: number
-  colNum: number
   gameTimer: IntervalID 
 
   constructor(ground: Ground, initSpeed:number = 5){
@@ -33,13 +31,13 @@ export default class Snake {
   @computed get tailDirection (): number {  // 尾巴的方向 >> 用于吃蛋后加长的pixel的位置
     let direction = DIRECTION.RIGHT
     switch (this.body[0] - this.body[1]) {
-      case -this.colNum:
+      case - this.ground.colNum:
         direction = DIRECTION.BOTTOM
         break
       case 1:
         direction = DIRECTION.RIGHT
         break
-      case this.colNum:
+      case this.ground.colNum:
         direction = DIRECTION.TOP
         break
       case -1:
@@ -63,13 +61,13 @@ export default class Snake {
   @action addBodyLength = () => {  // 吃egg后增加身长的位置
     switch (this.tailDirection) {
       case 40:
-        this.body.unshift(this.body[0] + this.colNum)
+        this.body.unshift(this.body[0] + this.ground.colNum)
         break;
       case 39:
         this.body.unshift(this.body[0] - 1)
         break;
       case 38:
-        this.body.unshift(this.body[0] - this.colNum)
+        this.body.unshift(this.body[0] - this.ground.colNum)
         break;
       case 37:
         this.body.unshift(this.body[0] + 1)
@@ -137,27 +135,28 @@ export default class Snake {
 
   @action goRight = () => {    // 向右移动
     if (this.ground.rightPixelsWall.indexOf(this.headIndex) !== -1 ) {  // 如果撞到右边墙则传送到左边
-      this.body.push(this.headIndex - this.colNum + 1)
+      this.body.push(this.headIndex - this.ground.colNum + 1)
       this.body.shift()
     } else {                                                           // 正常向右移动
       this.body.push(this.headIndex + 1)
       this.body.shift()
+      console.log('this.body', this.body)
     }
   }
 
   @action goTop = () => {       //向上移动
     if (this.ground.topPixelsWall.indexOf(this.headIndex) !== -1) {     // 如果撞到上边墙则传送到下边
-      this.body.push(this.headIndex + this.colNum * this.rowNum )
+      this.body.push(this.headIndex + this.ground.colNum * this.ground.rowNum )
       this.body.shift()
     } else {                                                           // 正常向上移动
-      this.body.push(this.headIndex - this.colNum)
+      this.body.push(this.headIndex - this.ground.colNum)
       this.body.shift()
     }
   }
 
   @action goLeft = () => {      // 向左移动
     if (this.ground.leftPixelsWall.indexOf(this.headIndex) !== -1) {    // 如果撞到左边墙则传送到右边
-      this.body.push(this.headIndex + this.colNum - 1)
+      this.body.push(this.headIndex + this.ground.colNum - 1)
       this.body.shift()
     } else {                                                           // 正常向左移动
       this.body.push(this.headIndex - 1)
@@ -167,11 +166,12 @@ export default class Snake {
 
   @action goBottom = () => {    //向下移动
     if (this.ground.bottomPixelsWall.indexOf(this.headIndex) !== -1) {  // 如果撞到下边墙则传送到上边
-      this.body.push(this.headIndex - this.colNum * this.rowNum )
+      this.body.push(this.headIndex - this.ground.colNum * this.ground.rowNum )
       this.body.shift()
-    } else {                                                           // 正常向下移动
-      this.body.push(this.headIndex + this.colNum)
+    } else {                                                            // 正常向下移动
+      this.body.push(this.headIndex + this.ground.colNum)
       this.body.shift()
+      console.log('this.body', this.body)
     }
   }
 

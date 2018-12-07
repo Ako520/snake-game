@@ -1,8 +1,7 @@
 // @flow
-
 import {DIRECTION, COMMAND, GAMESTATUS} from '../utils/const'
 import { observable } from 'mobx'
-import ground from './ground'
+import typeof ground from './ground'
 
 class Control {
   @observable gameStatus = GAMESTATUS.WAITING
