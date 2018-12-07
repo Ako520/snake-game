@@ -1,3 +1,4 @@
+// @flow
 import { observable, action , computed} from 'mobx'
 import Pixel from './pixel'
 import Snake from './snake'
@@ -5,10 +6,17 @@ import Snake from './snake'
 class Ground {
   @observable pixels = []
   @observable score = 0
-  @observable snake = {}
+  @observable snake: Snake
   @observable eggIndex = 876
   
-  constructor(rowNum = 20, colNum = 20){
+  rowNum: number
+  colNum: number
+  topPixelsWall: (number)[]
+  bottomPixelsWall: (number)[]
+  leftPixelsWall: (number)[]
+  rightPixelsWall: (number)[]
+
+  constructor(rowNum:number = 20, colNum: number = 20){
     this.rowNum = rowNum
     this.colNum = colNum
     let index = 0
@@ -32,8 +40,6 @@ class Ground {
       this.leftPixelsWall.push(i * this.colNum) // 左面的像素墙
       this.rightPixelsWall.push((i + 1) * this.colNum - 1) // 右面的像素墙
     }
-    console.log(this.rightPixelsWall.slice())
-    this.snake = Snake.fromJS(rowNum, this.colNum)
   }
 
   @computed get width () {
@@ -54,11 +60,11 @@ class Ground {
   }
 
 
-  static fromJS(rowNum, colNum) {
+  static fromJS(rowNum: number, colNum: number) {
     const store = new Ground(rowNum, colNum)
-    store.snake = Snake.fromJS(store, rowNum, colNum)
+    store.snake = Snake.fromJS(store)
     return store
   }
 }
 
-export default Ground.fromJS()
+export default Ground.fromJS(40, 40)
