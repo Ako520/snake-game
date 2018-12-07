@@ -1,5 +1,9 @@
+// @flow
 export default class {
-  constructor(index){
+  egg: boolean
+  index: number
+
+  constructor(index: number){
     this.egg = false
     this.index = index
   }
