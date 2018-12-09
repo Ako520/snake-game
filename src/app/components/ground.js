@@ -62,18 +62,15 @@ class Ground extends React.Component<{}> {
   render() {
     const { rowNum, colNum, width, height } = ground
     return (
-      <React.Fragment>
-        <GroundStyled
-          rowNum={rowNum}
-          colNum={colNum}
-          width={width}
-          height={height}
-          className="ground"
-        >
-          {this.renderPixel()}
-        </GroundStyled>
-        <div className="score">{ground.score}</div>
-      </React.Fragment>
+      <GroundStyled
+        rowNum={rowNum}
+        colNum={colNum}
+        width={width}
+        height={height}
+        className="ground"
+      >
+        {this.renderPixel()}
+      </GroundStyled>
     )
   }
 }
