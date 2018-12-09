@@ -4,30 +4,20 @@ import Pixel from './pixel'
 import Snake from './snake'
 
 class Ground {
-  @observable pixels = []
   @observable score = 0
   @observable snake: Snake
   @observable eggIndex = 876
-  
-  rowNum: number
-  colNum: number
+  @observable rowNum: number
+  @observable colNum: number
   topPixelsWall: (number)[]
   bottomPixelsWall: (number)[]
   leftPixelsWall: (number)[]
   rightPixelsWall: (number)[]
 
-  constructor(rowNum:number = 20, colNum: number = 20){
-    this.rowNum = rowNum
-    this.colNum = colNum
-    let index = 0
-    for (let i = 0; i < this.colNum; i++) {
-      for (let j = 0; j < rowNum; j++) {
-        this.pixels.push(
-          new Pixel(index)
-        )
-        index++
-      }
-    }
+  constructor(colNum: number = 20, rowNum:number = 20){
+    this.setSize(colNum, rowNum)
+
+    
     this.topPixelsWall = []
     this.bottomPixelsWall = []
     this.leftPixelsWall = []
@@ -43,11 +33,27 @@ class Ground {
   }
 
   @computed get width () {
-    return this.colNum * 20
+    return this.rowNum * 20
   }
 
   @computed get height () {
-    return this.rowNum * 20
+    return this.colNum * 20
+  }
+
+  @computed get pixels () {
+    let index = 0
+    const pixelArr = []
+
+    for (let i = 0; i < this.colNum; i++) {
+      for (let j = 0; j < this.rowNum; j++) {
+        pixelArr.push(
+          new Pixel(index)
+        )
+        index++
+      }
+    }
+
+    return pixelArr
   }
 
   @action start = () => {
@@ -56,15 +62,18 @@ class Ground {
 
   @action changeEggIndex = () => {
     this.eggIndex = Math.round(Math.random() * ( this.pixels.length - 1 ))
-    console.log('change')
   }
 
+  @action setSize = (rowNum: number, colNum: number) => {
+    this.rowNum = rowNum
+    this.colNum = colNum
+  }
 
-  static fromJS(rowNum: number, colNum: number) {
-    const store = new Ground(rowNum, colNum)
+  static fromJS(colNum: number, rowNum: number) {
+    const store = new Ground(colNum, rowNum)
     store.snake = Snake.fromJS(store)
     return store
   }
 }
 
-export default Ground.fromJS(40, 40)
+export default Ground.fromJS(20, 10)

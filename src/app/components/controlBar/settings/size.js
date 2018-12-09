@@ -3,22 +3,25 @@ import React, { Component } from 'react'
 import { Form , Radio , Input} from 'antd'
 import { Row } from 'antd';
 import ground from '../../../stores/ground'
+import control from '../../../stores/control'
+import {observer} from 'mobx-react'
 
 const FormItem = Form.Item
 const RadioButton = Radio.Button
 const RadioGroup = Radio.Group
 
-export default class Size extends Component<{}> {
+@observer
+class Size extends Component<{}> {
   render() {
     return (
       <FormItem
         label='Size'
       >
         <Row type='flex' align='middle' justify=''>
-          <RadioGroup>
+          <RadioGroup onChange={control.handleSizeChange} defaultValue='small'>
             <RadioButton value='large'>Large</RadioButton>
             <RadioButton value='middle'>Middle</RadioButton>
-            <RadioButton value='smale'>Small</RadioButton>
+            <RadioButton value='small'>Small</RadioButton>
           </RadioGroup>
           <Input
             style={{ width: 110, marginLeft: 10 }}
@@ -31,8 +34,9 @@ export default class Size extends Component<{}> {
             value={ground.colNum}
           />
         </Row>
-        
       </FormItem>
     )
   }
 }
+
+export default Size

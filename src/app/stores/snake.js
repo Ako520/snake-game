@@ -140,7 +140,6 @@ export default class Snake {
     } else {                                                           // 正常向右移动
       this.body.push(this.headIndex + 1)
       this.body.shift()
-      console.log('this.body', this.body)
     }
   }
 
@@ -171,7 +170,6 @@ export default class Snake {
     } else {                                                            // 正常向下移动
       this.body.push(this.headIndex + this.ground.colNum)
       this.body.shift()
-      console.log('this.body', this.body)
     }
   }
 
