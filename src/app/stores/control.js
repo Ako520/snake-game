@@ -1,11 +1,11 @@
 // @flow
 import {DIRECTION, COMMAND, GAMESTATUS} from '../utils/const'
 import { observable } from 'mobx'
-import typeof ground from './ground'
+import ground from './ground'
 
 class Control {
   @observable gameStatus = GAMESTATUS.WAITING
-  ground: ground
+  ground: typeof ground
 
   constructor() {
     this.bindKeyDownEvent()
@@ -18,17 +18,11 @@ class Control {
     window.document.onkeydown = (e) => {
       if (directionKeyCode.indexOf(e.keyCode) !== -1) {
         this.ground.snake.turnDirection(e.keyCode)
+        e.preventDefault()
       }
-      console.log('e.keyCode', e.keyCode)
-      switch (e.keyCode) {
-        case BOTTOM || RIGHT || TOP || LEFT:
-          this.ground.snake.turnDirection(e.keyCode)
-          break;
-        case COMMAND.TOGGLEGAME:
-          this.startOrPauseGame()
-          break;
-        default:
 
+      if (e.keyCode === COMMAND.TOGGLEGAME) {
+        this.startOrPauseGame()
       }
     }
   }
@@ -49,6 +43,22 @@ class Control {
     } else {
       pauseGame()
     }
+  }
+
+  sizeStrategies = {
+    large: () => {
+      ground.setSize(40, 40)
+    },
+    middle: () => {
+      ground.setSize(20, 20)
+    },
+    small: () => {
+      ground.setSize(20, 10)
+    }
+  }
+
+  handleSizeChange = (e: any) => {
+    this.sizeStrategies[e.target.value]()
   }
 }
 
