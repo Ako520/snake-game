@@ -1,11 +1,15 @@
 // @flow
-import { observable, computed, action } from 'mobx'
+import {
+  observable,
+  computed,
+  action,
+} from 'mobx'
 import {DIRECTION} from '../utils/const'
 import typeof Ground from './ground'
 
 export default class Snake {
   @observable body = []
-  @observable direction = DIRECTION.RIGHT
+  @observable direction: number = DIRECTION.RIGHT
   @observable steps = []
   @observable initSpeed:number
   ground: Ground
@@ -14,10 +18,8 @@ export default class Snake {
   constructor(ground: Ground, initSpeed:number = 5){
     this.ground = ground
     this.initSpeed = initSpeed
-    let snakeStartIndex = (this.ground.rowNum / 2 - 1 ) * ground.colNum
-    for (let i = 0; i < 4; i++) {
-      this.body.push(3 + snakeStartIndex + i)
-    }
+
+    this.initBody()
   }
 
   @computed get headIndex (): number {  // 头的位置
@@ -47,6 +49,16 @@ export default class Snake {
 
     }
     return direction
+  }
+
+  @action initBody = () => {
+    const bodyArr = []
+    let snakeStartIndex = (this.ground.rowNum / 2 - 1 ) * this.ground.colNum
+    for (let i = 0; i < 4; i++) {
+      bodyArr.push(3 + snakeStartIndex + i)
+    }
+
+    this.body = bodyArr
   }
 
   @action turnDirection = (nextStepDirection: number) => {   // 改变方向 >> 如果当前方向是左 新方向是右或左 那么不会改变方向

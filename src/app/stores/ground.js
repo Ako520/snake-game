@@ -2,11 +2,12 @@
 import { observable, action , computed} from 'mobx'
 import Pixel from './pixel'
 import Snake from './snake'
+import events from './events'
 
 class Ground {
   @observable score = 0
   @observable snake: Snake
-  @observable eggIndex = 876
+  @observable eggIndex
   @observable rowNum: number
   @observable colNum: number
   topPixelsWall: (number)[]
@@ -14,9 +15,10 @@ class Ground {
   leftPixelsWall: (number)[]
   rightPixelsWall: (number)[]
 
-  constructor(colNum: number = 20, rowNum:number = 20){
+  constructor(colNum: number = 20, rowNum:number = 10){
     this.setSize(colNum, rowNum)
-
+    this.changeEggIndex() // init Egg
+    this.bindEvents()
     
     this.topPixelsWall = []
     this.bottomPixelsWall = []
@@ -33,11 +35,11 @@ class Ground {
   }
 
   @computed get width () {
-    return this.rowNum * 20
+    return this.colNum * 20
   }
 
   @computed get height () {
-    return this.colNum * 20
+    return this.rowNum * 20
   }
 
   @computed get pixels () {
@@ -56,6 +58,34 @@ class Ground {
     return pixelArr
   }
 
+  bindEvents = () => {
+    events.$setSize.subscribe((params) => {
+      if (params.size) {
+        const sizeObj = this.sizeStrategies[params.size]
+        this.setSize(sizeObj.colNum, sizeObj.rowNum)
+      } else {
+        this.setSize(params.colNum, params.rowNum)
+      }
+
+      this.changeEggIndex()
+    })
+  }
+
+  sizeStrategies = {
+    large: {
+      colNum: 40, 
+      rowNum: 40,
+    },
+    middle: {
+      colNum: 20, 
+      rowNum: 20,
+    },
+    small: {
+      colNum: 20, 
+      rowNum: 10,
+    }
+  }
+
   @action start = () => {
     this.snake.start()
   }
@@ -64,7 +94,7 @@ class Ground {
     this.eggIndex = Math.round(Math.random() * ( this.pixels.length - 1 ))
   }
 
-  @action setSize = (rowNum: number, colNum: number) => {
+  @action setSize = (colNum: number, rowNum: number) => {
     this.rowNum = rowNum
     this.colNum = colNum
   }

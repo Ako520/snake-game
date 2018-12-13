@@ -21,14 +21,14 @@ const GroundStyled = styled.div`
   margin-top: 100px;
 
   .pixel {
-    width: ${props => ( ( (props.width || 400) - 1 ) / (props.rowNum) )}px;
-    height: ${props => ( ( (props.height || 400) - 1 ) / (props.colNum) )}px;
+    width: ${props => ( ( (props.width || 400) - 1 ) / (props.colNum) )}px;
+    height: ${props => ( ( (props.height || 400) - 1 ) / (props.rowNum) )}px;
     box-shadow: 0px 0px 1px ${props => props.theme.grayLine};
   }
 
   .egg {
-    width: ${props => ( ( (props.width || 400) - 1 ) / (props.rowNum) )}px;
-    height: ${props => ( ( (props.height || 400) - 1 ) / (props.colNum) )}px;
+    width: ${props => ( ( (props.width || 400) - 1 ) / (props.colNum) )}px;
+    height: ${props => ( ( (props.height || 400) - 1 ) / (props.rowNum) )}px;
     box-shadow: 0px 0px 1px ${props => props.theme.grayLine};
     border-radius: 50%;
     background: black;

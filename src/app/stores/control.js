@@ -2,6 +2,7 @@
 import {DIRECTION, COMMAND, GAMESTATUS} from '../utils/const'
 import { observable } from 'mobx'
 import ground from './ground'
+import events from './events'
 
 class Control {
   @observable gameStatus = GAMESTATUS.WAITING
@@ -17,7 +18,7 @@ class Control {
 
     window.document.onkeydown = (e) => {
       if (directionKeyCode.indexOf(e.keyCode) !== -1) {
-        this.ground.snake.turnDirection(e.keyCode)
+        ground.snake.turnDirection(e.keyCode)
         e.preventDefault()
       }
 
@@ -30,12 +31,12 @@ class Control {
   startOrPauseGame = () => {
     const startGame = () => {
       this.gameStatus = GAMESTATUS.PLAYING
-      this.ground.snake.start()
+      ground.snake.start()
     }
 
     const pauseGame = () => {
       this.gameStatus = GAMESTATUS.WAITING
-      this.ground.snake.pause()
+      ground.snake.pause()
     }
 
     if (this.gameStatus === GAMESTATUS.WAITING) {
@@ -45,20 +46,8 @@ class Control {
     }
   }
 
-  sizeStrategies = {
-    large: () => {
-      ground.setSize(40, 40)
-    },
-    middle: () => {
-      ground.setSize(20, 20)
-    },
-    small: () => {
-      ground.setSize(20, 10)
-    }
-  }
-
   handleSizeChange = (e: any) => {
-    this.sizeStrategies[e.target.value]()
+    events.$setSize.next({ size: e.target.value })
   }
 }
 
